@@ -1,165 +1,8 @@
 <!DOCTYPE html>
-<!-- saved from url=(0039)http://localhost:8080/source?f=busyLoop -->
+<!-- saved from url=(0025)file:///tmp/pprof001.html -->
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<title>sample.bin cpu</title>
-
-<style type="text/css">
-html {
-  height: 100%;
-  min-height: 100%;
-  margin: 0px;
-}
-body {
-  margin: 0px;
-  width: 100%;
-  height: 100%;
-  min-height: 100%;
-  overflow: hidden;
-}
-#graphcontainer {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  min-height: 100%;
-  width: 100%;
-  min-width: 100%;
-  margin: 0px;
-}
-#graph {
-  flex: 1 1 auto;
-  overflow: hidden;
-}
-svg {
-  width: 100%;
-  height: auto;
-}
-button {
-  margin-top: 5px;
-  margin-bottom: 5px;
-}
-#detailtext {
-  display: none;
-  position: fixed;
-  top: 20px;
-  right: 10px;
-  background-color: #ffffff;
-  min-width: 160px;
-  border: 1px solid #888;
-  box-shadow: 4px 4px 4px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-#closedetails {
-  float: right;
-  margin: 2px;
-}
-#home {
-  font-size: 14pt;
-  padding-left: 0.5em;
-  padding-right: 0.5em;
-  float: right;
-}
-.menubar {
-  display: inline-block;
-  background-color: #f8f8f8;
-  border: 1px solid #ccc;
-  width: 100%;
-}
-.menu-header {
-  position: relative;
-  display: inline-block;
-  padding: 2px 2px;
-  cursor: default;
-  font-size: 14pt;
-}
-.menu {
-  display: none;
-  position: absolute;
-  background-color: #f8f8f8;
-  border: 1px solid #888;
-  box-shadow: 4px 4px 4px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-  margin-top: 2px;
-  left: 0px;
-  min-width: 5em;
-}
-.menu hr {
-  background-color: #fff;
-  margin-top: 0px;
-  margin-bottom: 0px;
-}
-.menu a, .menu button {
-  display: block;
-  width: 100%;
-  margin: 0px;
-  padding: 2px 0px 2px 0px;
-  text-align: left;
-  text-decoration: none;
-  color: #000;
-  background-color: #f8f8f8;
-  font-size: 12pt;
-  border: none;
-}
-.menu-header:hover {
-  background-color: #ccc;
-}
-.menu-header:hover .menu {
-  display: block;
-}
-.menu a:hover, .menu button:hover {
-  background-color: #ccc;
-}
-.menu a.disabled {
-  color: gray;
-  pointer-events: none;
-}
-#searchbox {
-  margin-left: 10pt;
-}
-#bodycontainer {
-  width: 100%;
-  height: 100%;
-  max-height: 100%;
-  overflow: scroll;
-  padding-top: 5px;
-}
-#toptable {
-  border-spacing: 0px;
-  width: 100%;
-  padding-bottom: 1em;
-}
-#toptable tr th {
-  border-bottom: 1px solid black;
-  text-align: right;
-  padding-left: 1em;
-  padding-top: 0.2em;
-  padding-bottom: 0.2em;
-}
-#toptable tr td {
-  padding-left: 1em;
-  font: monospace;
-  text-align: right;
-  white-space: nowrap;
-  cursor: default;
-}
-#toptable tr th:nth-child(6),
-#toptable tr th:nth-child(7),
-#toptable tr td:nth-child(6),
-#toptable tr td:nth-child(7) {
-  text-align: left;
-}
-#toptable tr td:nth-child(6) {
-  max-width: 30em;  
-  overflow: hidden;
-}
-#flathdr1, #flathdr2, #cumhdr1, #cumhdr2, #namehdr {
-  cursor: ns-resize;
-}
-.hilite {
-  background-color: #ccf;
-}
-</style>
-
+<title>Pprof listing</title>
 <style type="text/css">
 body {
 font-family: sans-serif;
@@ -215,236 +58,21 @@ function pprof_toggle_asm(e) {
 </head>
 <body>
 
-
-<div id="detailtext">
-<button id="closedetails">Close</button>
-<div>File: sample.bin</div><div>Type: cpu</div><div>Time: Sep 29, 2017 at 1:57pm (PDT)</div><div>Duration: 2s, Total samples = 1.76s (87.91%)</div>
-</div>
-
-<div class="menubar">
-
-<div class="menu-header">
-View
-<div class="menu">
-<a title="Outputs top entries in text form" href="http://localhost:8080/top" id="topbtn">Top</a>
-<a title="Display profile as a directed graph" href="http://localhost:8080/" id="graphbtn">Graph</a>
-<a title="Output callers/callees of functions matching regexp" href="http://localhost:8080/peek" id="peek">Peek</a>
-<a title="Output annotated source for functions matching regexp" href="http://localhost:8080/source" id="list">Source</a>
-<a title="Output assembly listings annotated with samples" href="http://localhost:8080/disasm" id="disasm">Disassemble</a>
-<hr>
-<button title="Show information about the profile and this view" id="details">Details</button>
-</div>
-</div>
-
-<div class="menu-header">
-Refine
-<div class="menu">
-<a title="Restricts to samples going through a node matching regexp
-Discard samples that do not include a node matching this regexp.
-Matching includes the function name, filename or object name.
-" href="http://localhost:8080/source" id="focus" class="disabled">Focus</a>
-<a title="Skips paths going through any nodes matching regexp
-If set, discard samples that include a node matching this regexp.
-Matching includes the function name, filename or object name.
-" href="http://localhost:8080/source" id="ignore" class="disabled">Ignore</a>
-<a title="Skips nodes matching regexp
-Discard nodes that match this location.
-Other nodes from samples that include this location will be shown.
-Matching includes the function name, filename or object name.
-" href="http://localhost:8080/source" id="hide" class="disabled">Hide</a>
-<a title="Only show nodes matching regexp
-If set, only show nodes that match this location.
-Matching includes the function name, filename or object name.
-" href="http://localhost:8080/source" id="show" class="disabled">Show</a>
-<hr>
-<a title="Show the entire profile" href="http://localhost:8080/source">Reset</a>
-</div>
-</div>
-
-<input id="searchbox" type="text" placeholder="Search regexp" autocomplete="off" autocapitalize="none" size="40">
-
-<span id="home">sample.bin cpu</span>
-
-</div> 
-
-<div id="errors"></div>
-
-
-<div id="bodycontainer">
-<h1>main.busyLoop</h1>/usr/local/google/home/sanjay/go/src/github.com/google/pprof/internal/report/testdata/sample/sample.go
-<pre onclick="pprof_toggle_asm(event)">  Total:       150ms      1.65s (flat, cum) 93.75%
-<span class="line">     24</span> <span class="nop">           .          .           	} </span>
-<span class="line">     25</span> <span class="nop">           .          .           	defer pprof.StopCPUProfile() </span>
-<span class="line">     26</span> <span class="nop">           .          .           	busyLoop() </span>
-<span class="line">     27</span> <span class="nop">           .          .           } </span>
-<span class="line">     28</span> <span class="nop">           .          .            </span>
-<span class="line">     29</span> <span class="deadsrc">           .          .           func busyLoop() { </span><span class="asm">                   .          .   4b4310:     mov    %fs:0xfffffffffffffff8,%rcx                                           <span class="unimportant">sample.go:29</span>
-                   .          .   4b4319:     lea    -0x128(%rsp),%rax                                                     <span class="unimportant">sample.go:29</span>
-                   .          .   4b4321:     cmp    0x10(%rcx),%rax                                                       <span class="unimportant">sample.go:29</span>
-                   .          .   4b4325:     jbe    4b45ac &lt;main.busyLoop+0x29c&gt;                                          <span class="unimportant">sample.go:29</span>
-                   .          .   4b432b:     sub    $0x1a8,%rsp                                                           <span class="unimportant">sample.go:29</span>
-                   .          .   4b4332:     mov    %rbp,0x1a0(%rsp)                                                      <span class="unimportant">sample.go:29</span>
-                   .          .   4b433a:     lea    0x1a0(%rsp),%rbp                                                      <span class="unimportant">sample.go:29</span>
-                                     ⋮
-                   .          .   4b45ac:     callq  451500 &lt;runtime.morestack_noctxt&gt;                                     <span class="unimportant">sample.go:29</span>
-                   .          .   4b45b1:     jmpq   4b4310 &lt;main.busyLoop&gt;                                                <span class="unimportant">sample.go:29</span>
-                   .          .   4b45b6:     int3                                                                         <span class="unimportant">sample.go:29</span>
-                   .          .   4b45b7:     int3                                                                         <span class="unimportant">sample.go:29</span>
-                   .          .   4b45b8:     int3                                                                         <span class="unimportant">sample.go:29</span>
-                   .          .   4b45b9:     int3                                                                         <span class="unimportant">sample.go:29</span>
-                   .          .   4b45ba:     int3                                                                         <span class="unimportant">sample.go:29</span>
-                   .          .   4b45bb:     int3                                                                         <span class="unimportant">sample.go:29</span>
-                   .          .   4b45bc:     int3                                                                         <span class="unimportant">sample.go:29</span>
-                   .          .   4b45bd:     int3                                                                         <span class="unimportant">sample.go:29</span>
-                   .          .   4b45be:     int3                                                                         <span class="unimportant">sample.go:29</span>
-</span>
-<span class="line">     30</span> <span class="deadsrc">           .          .           	m := make(map[int]int) </span><span class="asm">                   .          .   4b4342:             lea    0x110(%rsp),%rdi                                              <span class="unimportant">sample.go:30</span>
-                   .          .   4b434a:             xorps  %xmm0,%xmm0                                                   <span class="unimportant">sample.go:30</span>
-                   .          .   4b434d:             add    $0xfffffffffffffff0,%rdi                                      <span class="unimportant">sample.go:30</span>
-                   .          .   4b4351:             mov    %rbp,-0x10(%rsp)                                              <span class="unimportant">sample.go:30</span>
-                   .          .   4b4356:             lea    -0x10(%rsp),%rbp                                              <span class="unimportant">sample.go:30</span>
-                   .          .   4b435b:             callq  453b80 &lt;runtime.duffzero+0x120&gt;                               <span class="unimportant">sample.go:30</span>
-                   .          .   4b4360:             mov    0x0(%rbp),%rbp                                                <span class="unimportant">sample.go:30</span>
-                   .          .   4b4364:             lea    0x58(%rsp),%rdi                                               <span class="unimportant">sample.go:30</span>
-                   .          .   4b4369:             add    $0xffffffffffffffd0,%rdi                                      <span class="unimportant">sample.go:30</span>
-                   .          .   4b436d:             mov    %rbp,-0x10(%rsp)                                              <span class="unimportant">sample.go:30</span>
-                   .          .   4b4372:             lea    -0x10(%rsp),%rbp                                              <span class="unimportant">sample.go:30</span>
-                   .          .   4b4377:             callq  453b62 &lt;runtime.duffzero+0x102&gt;                               <span class="unimportant">sample.go:30</span>
-                   .          .   4b437c:             mov    0x0(%rbp),%rbp                                                <span class="unimportant">sample.go:30</span>
-                   .          .   4b4380:             lea    0x1ca19(%rip),%rax        # 4d0da0 &lt;type.*+0x1bda0&gt;           <span class="unimportant">sample.go:30</span>
-                   .          .   4b4387:             mov    %rax,(%rsp)                                                   <span class="unimportant">sample.go:30</span>
-                   .          .   4b438b:             movq   $0x0,0x8(%rsp)                                                <span class="unimportant">sample.go:30</span>
-                   .          .   4b4394:             lea    0x110(%rsp),%rcx                                              <span class="unimportant">sample.go:30</span>
-                   .          .   4b439c:             mov    %rcx,0x10(%rsp)                                               <span class="unimportant">sample.go:30</span>
-                   .          .   4b43a1:             lea    0x58(%rsp),%rcx                                               <span class="unimportant">sample.go:30</span>
-                   .          .   4b43a6:             mov    %rcx,0x18(%rsp)                                               <span class="unimportant">sample.go:30</span>
-                   .          .   4b43ab:             callq  407f90 &lt;runtime.makemap&gt;                                      <span class="unimportant">sample.go:30</span>
-                   .          .   4b43b0:             mov    0x20(%rsp),%rax                                               <span class="unimportant">sample.go:30</span>
-                   .          .   4b43b5:             mov    %rax,0xe8(%rsp)                                               <span class="unimportant">sample.go:30</span>
-                   .          .   4b43bd:             xor    %ecx,%ecx                                                     <span class="unimportant">sample.go:30</span>
-</span>
-<span class="line">     31</span> <span class="deadsrc">           .          .           	for i := 0; i &lt; 1000000; i++ { </span><span class="asm">                   .          .   4b43bf:             jmp    4b43fc &lt;main.busyLoop+0xec&gt;                                   <span class="unimportant">sample.go:31</span>
-                   .          .   4b43c1:             mov    %rcx,0x30(%rsp)                                               <span class="unimportant">sample.go:31</span>
-                   .          .   4b43c6:             lea    0x1c9d3(%rip),%rdx        # 4d0da0 &lt;type.*+0x1bda0&gt;           <span class="unimportant">sample.go:31</span>
-                                     ⋮
-                   .          .   4b43f1:             inc    %rcx                                                          <span class="unimportant">sample.go:31</span>
-                   .          .   4b43f4:             mov    0xe8(%rsp),%rax                                               <span class="unimportant">sample.go:31</span>
-                   .          .   4b43fc:             cmp    $0xf4240,%rcx                                                 <span class="unimportant">sample.go:31</span>
-                   .          .   4b4403:             jl     4b43c1 &lt;main.busyLoop+0xb1&gt;                                   <span class="unimportant">sample.go:31</span>
-                   .          .   4b4405:             xor    %ecx,%ecx                                                     <span class="unimportant">sample.go:31</span>
-                   .          .   4b4407:             xorps  %xmm0,%xmm0                                                   <span class="unimportant">sample.go:31</span>
-</span>
-<span class="line">     32</span> <span class="deadsrc">           .      130ms           		m[i] = i + 10 </span><span class="asm" style="">                   .          .   4b43cd:                     mov    %rdx,(%rsp)                                           <span class="unimportant">sample.go:32</span>
-                   .          .   4b43d1:                     mov    %rax,0x8(%rsp)                                        <span class="unimportant">sample.go:32</span>
-                   .          .   4b43d6:                     mov    %rcx,0x10(%rsp)                                       <span class="unimportant">sample.go:32</span>
-                   .      130ms   4b43db:                     callq  40c210 &lt;runtime.mapassign_fast64&gt;                     <span class="unimportant">sample.go:32</span>
-                   .          .   4b43e0:                     mov    0x18(%rsp),%rax                                       <span class="unimportant">sample.go:32</span>
-                   .          .   4b43e5:                     mov    0x30(%rsp),%rcx                                       <span class="unimportant">sample.go:32</span>
-                   .          .   4b43ea:                     lea    0xa(%rcx),%rdx                                        <span class="unimportant">sample.go:32</span>
-                   .          .   4b43ee:                     mov    %rdx,(%rax)                                           <span class="unimportant">sample.go:32</span>
-</span>
-<span class="line">     33</span> <span class="nop">           .          .           	} </span>
-<span class="line">     34</span> <span class="nop">           .          .           	var sum float64 </span>
-<span class="line">     35</span> <span class="deadsrc">        50ms       50ms           	for i := 0; i &lt; 100; i++ { </span><span class="asm" style="">                   .          .   4b440a:             jmpq   4b4491 &lt;main.busyLoop+0x181&gt;                                  <span class="unimportant">sample.go:35</span>
-                50ms       50ms   4b440f:             movsd  %xmm1,0x48(%rsp)                                              <span class="unimportant">sample.go:35</span>
-                   .          .   4b4415:             lea    0x140(%rsp),%rax                                              <span class="unimportant">sample.go:35</span>
-                                     ⋮
-                   .          .   4b4485:             lea    0x1(%rdx),%rcx                                                <span class="unimportant">sample.go:35</span>
-                   .          .   4b4489:             mov    0xe8(%rsp),%rax                                               <span class="unimportant">sample.go:35</span>
-                   .          .   4b4491:             cmp    $0x64,%rcx                                                    <span class="unimportant">sample.go:35</span>
-                   .          .   4b4495:             jge    4b44f1 &lt;main.busyLoop+0x1e1&gt;                                  <span class="unimportant">sample.go:35</span>
-                   .          .   4b4497:             mov    %rcx,0x38(%rsp)                                               <span class="unimportant">sample.go:35</span>
-                   .          .   4b449c:             movsd  %xmm0,0x48(%rsp)                                              <span class="unimportant">sample.go:35</span>
-</span>
-<span class="line">     36</span> <span class="deadsrc">        50ms      1.42s           		for _, v := range m { </span><span class="asm" style="">                   .          .   4b441d:                     mov    %rax,(%rsp)                                           <span class="unimportant">sample.go:36</span>
-                   .      1.37s   4b4421:                     callq  409500 &lt;runtime.mapiternext&gt;                          <span class="unimportant">sample.go:36</span>
-                   .          .   4b4426:                     movsd  0x40(%rsp),%xmm0                                      <span class="unimportant">sample.go:36</span>
-                20ms       20ms   4b442c:                     movsd  0x48(%rsp),%xmm1                                      <span class="unimportant">sample.go:36</span>
-                                     ⋮
-                20ms       20ms   4b4436:                     mov    0x140(%rsp),%rax                                      <span class="unimportant">sample.go:36</span>
-                   .          .   4b443e:                     test   %rax,%rax                                             <span class="unimportant">sample.go:36</span>
-                   .          .   4b4441:                     je     4b4480 &lt;main.busyLoop+0x170&gt;                          <span class="unimportant">sample.go:36</span>
-                10ms       10ms   4b4443:                     movsd  %xmm0,0x40(%rsp)                                      <span class="unimportant">sample.go:36</span>
-                   .          .   4b4449:                     mov    0x148(%rsp),%rax                                      <span class="unimportant">sample.go:36</span>
-                   .          .   4b4451:                     mov    (%rax),%rax                                           <span class="unimportant">sample.go:36</span>
-                                     ⋮
-                   .          .   4b4480:                     mov    0x38(%rsp),%rdx                                       <span class="unimportant">sample.go:36</span>
-                                     ⋮
-                   .          .   4b44a2:                     lea    0x140(%rsp),%rdi                                      <span class="unimportant">sample.go:36</span>
-                   .          .   4b44aa:                     xorps  %xmm0,%xmm0                                           <span class="unimportant">sample.go:36</span>
-                   .          .   4b44ad:                     add    $0xffffffffffffffe0,%rdi                              <span class="unimportant">sample.go:36</span>
-                   .          .   4b44b1:                     mov    %rbp,-0x10(%rsp)                                      <span class="unimportant">sample.go:36</span>
-                   .          .   4b44b6:                     lea    -0x10(%rsp),%rbp                                      <span class="unimportant">sample.go:36</span>
-                   .          .   4b44bb:                     callq  453b71 &lt;runtime.duffzero+0x111&gt;                       <span class="unimportant">sample.go:36</span>
-                   .          .   4b44c0:                     mov    0x0(%rbp),%rbp                                        <span class="unimportant">sample.go:36</span>
-                   .          .   4b44c4:                     lea    0x1c8d5(%rip),%rcx        # 4d0da0 &lt;type.*+0x1bda0&gt;   <span class="unimportant">sample.go:36</span>
-                   .          .   4b44cb:                     mov    %rcx,(%rsp)                                           <span class="unimportant">sample.go:36</span>
-                   .          .   4b44cf:                     mov    %rax,0x8(%rsp)                                        <span class="unimportant">sample.go:36</span>
-                   .          .   4b44d4:                     lea    0x140(%rsp),%rdx                                      <span class="unimportant">sample.go:36</span>
-                   .          .   4b44dc:                     mov    %rdx,0x10(%rsp)                                       <span class="unimportant">sample.go:36</span>
-                   .          .   4b44e1:                     callq  409030 &lt;runtime.mapiterinit&gt;                          <span class="unimportant">sample.go:36</span>
-                   .          .   4b44e6:                     movsd  0x48(%rsp),%xmm0                                      <span class="unimportant">sample.go:36</span>
-                   .          .   4b44ec:                     jmpq   4b4436 &lt;main.busyLoop+0x126&gt;                          <span class="unimportant">sample.go:36</span>
-</span>
-<span class="line">     37</span> <span class="deadsrc">        50ms       50ms           			sum += math.Abs(float64(v)) </span><span class="asm" style="">                   .          .   4b4432:                             addsd  %xmm1,%xmm0                                   <span class="unimportant">sample.go:37</span>
-                                     ⋮
-                   .          .   4b4454:                             xorps  %xmm1,%xmm1                                   <span class="unimportant">sample.go:37</span>
-                10ms       10ms   4b4457:                             cvtsi2sd %rax,%xmm1                                  <span class="unimportant">sample.go:37</span>
-                40ms       40ms   4b445c:                             xorps  %xmm2,%xmm2                                   <span class="unimportant">sample.go:37</span>
-                   .          .   4b445f:                             ucomisd %xmm1,%xmm2                                  <span class="unimportant">abs.go:16</span>
-                   .          .   4b4463:                             jbe    4b4473 &lt;main.busyLoop+0x163&gt;                  <span class="unimportant">abs.go:16</span>
-                   .          .   4b4465:                             movsd  0x4e22b(%rip),%xmm3        # 502698 &lt;$f64.8000000000000000&gt; <span class="unimportant">abs.go:16</span>
-                   .          .   4b446d:                             pxor   %xmm3,%xmm1                                   <span class="unimportant">abs.go:17</span>
-                   .          .   4b4471:                             jmp    4b440f &lt;main.busyLoop+0xff&gt;                   <span class="unimportant">sample.go:37</span>
-                   .          .   4b4473:                             ucomisd %xmm2,%xmm1                                  <span class="unimportant">abs.go:19</span>
-                   .          .   4b4477:                             jne    4b440f &lt;main.busyLoop+0xff&gt;                   <span class="unimportant">abs.go:19</span>
-                   .          .   4b4479:                             jp     4b440f &lt;main.busyLoop+0xff&gt;                   <span class="unimportant">abs.go:19</span>
-                   .          .   4b447b:                             xorps  %xmm1,%xmm1                                   <span class="unimportant">abs.go:19</span>
-                   .          .   4b447e:                             jmp    4b440f &lt;main.busyLoop+0xff&gt;                   <span class="unimportant">sample.go:37</span>
-</span>
-<span class="line">     38</span> <span class="nop">           .          .           		} </span>
-<span class="line">     39</span> <span class="nop">           .          .           	} </span>
-<span class="line">     40</span> <span class="deadsrc">           .          .           	fmt.Println("Sum", sum) </span><span class="asm" style="">                   .          .   4b44f1:             movsd  %xmm0,0x50(%rsp)                                              <span class="unimportant">sample.go:40</span>
-                   .          .   4b44f7:             movq   $0x0,0xf0(%rsp)                                               <span class="unimportant">sample.go:40</span>
-                   .          .   4b4503:             movq   $0x0,0xf8(%rsp)                                               <span class="unimportant">sample.go:40</span>
-                   .          .   4b450f:             movq   $0x0,0x100(%rsp)                                              <span class="unimportant">sample.go:40</span>
-                   .          .   4b451b:             movq   $0x0,0x108(%rsp)                                              <span class="unimportant">sample.go:40</span>
-                   .          .   4b4527:             lea    0x13eb2(%rip),%rax        # 4c83e0 &lt;type.*+0x133e0&gt;           <span class="unimportant">sample.go:40</span>
-                   .          .   4b452e:             mov    %rax,0xf0(%rsp)                                               <span class="unimportant">sample.go:40</span>
-                   .          .   4b4536:             lea    0x4e5a3(%rip),%rax        # 502ae0 &lt;main.statictmp_2&gt;         <span class="unimportant">sample.go:40</span>
-                   .          .   4b453d:             mov    %rax,0xf8(%rsp)                                               <span class="unimportant">sample.go:40</span>
-                   .          .   4b4545:             lea    0x13294(%rip),%rax        # 4c77e0 &lt;type.*+0x127e0&gt;           <span class="unimportant">sample.go:40</span>
-                   .          .   4b454c:             mov    %rax,(%rsp)                                                   <span class="unimportant">sample.go:40</span>
-                   .          .   4b4550:             lea    0x50(%rsp),%rax                                               <span class="unimportant">sample.go:40</span>
-                   .          .   4b4555:             mov    %rax,0x8(%rsp)                                                <span class="unimportant">sample.go:40</span>
-                   .          .   4b455a:             callq  40da80 &lt;runtime.convT2E64&gt;                                    <span class="unimportant">sample.go:40</span>
-                   .          .   4b455f:             mov    0x18(%rsp),%rax                                               <span class="unimportant">sample.go:40</span>
-                   .          .   4b4564:             mov    0x10(%rsp),%rcx                                               <span class="unimportant">sample.go:40</span>
-                   .          .   4b4569:             mov    %rcx,0x100(%rsp)                                              <span class="unimportant">sample.go:40</span>
-                   .          .   4b4571:             mov    %rax,0x108(%rsp)                                              <span class="unimportant">sample.go:40</span>
-                   .          .   4b4579:             lea    0xf0(%rsp),%rax                                               <span class="unimportant">sample.go:40</span>
-                   .          .   4b4581:             mov    %rax,(%rsp)                                                   <span class="unimportant">sample.go:40</span>
-                   .          .   4b4585:             movq   $0x2,0x8(%rsp)                                                <span class="unimportant">sample.go:40</span>
-                   .          .   4b458e:             movq   $0x2,0x10(%rsp)                                               <span class="unimportant">sample.go:40</span>
-                   .          .   4b4597:             callq  493030 &lt;fmt.Println&gt;                                          <span class="unimportant">sample.go:40</span>
-</span>
-<span class="line">     41</span> <span class="deadsrc">           .          .           } </span><span class="asm">                   .          .   4b459c:     mov    0x1a0(%rsp),%rbp                                                      <span class="unimportant">sample.go:41</span>
-                   .          .   4b45a4:     add    $0x1a8,%rsp                                                           <span class="unimportant">sample.go:41</span>
-                   .          .   4b45ab:     retq                                                                         <span class="unimportant">sample.go:41</span>
-</span>
-</pre>
-<h1>main.busyLoop</h1>/usr/lib/google-golang/src/math/abs.go
+<div class="legend">File: sample.bin<br>
+Type: cpu<br>
+Time: Sep 29, 2017 at 1:57pm (PDT)<br>
+Duration: 2s, Total samples = 1.76s (87.91%)<br>Total: 1.76s</div><h1>main.busyLoop</h1>/usr/lib/google-golang/src/math/abs.go
 <pre onclick="pprof_toggle_asm(event)">  Total:       110ms      110ms (flat, cum)  6.25%
 <span class="line">     11</span> <span class="nop">           .          .           //	Abs(NaN) = NaN </span>
 <span class="line">     12</span> <span class="nop">           .          .           func Abs(x float64) float64 { </span>
 <span class="line">     13</span> <span class="nop">           .          .           	// TODO: once golang.org/issue/13095 is fixed, change this to: </span>
 <span class="line">     14</span> <span class="nop">           .          .           	// return Float64frombits(Float64bits(x) &amp;^ (1 &lt;&lt; 63)) </span>
 <span class="line">     15</span> <span class="nop">           .          .           	// But for now, this generates better code and can also be inlined: </span>
-<span class="line">     16</span> <span class="deadsrc">       100ms      100ms           	if x &lt; 0 { </span><span class="asm" style="">                   .          .   4b445f:             ucomisd %xmm1,%xmm2                                                  <span class="unimportant">abs.go:16</span>
+<span class="line">     16</span> <span class="deadsrc">       100ms      100ms           	if x &lt; 0 { </span><span class="asm">                   .          .   4b445f:             ucomisd %xmm1,%xmm2                                                  <span class="unimportant">abs.go:16</span>
                100ms      100ms   4b4463:             jbe    4b4473 &lt;main.busyLoop+0x163&gt;                                  <span class="unimportant">abs.go:16</span>
                    .          .   4b4465:             movsd  0x4e22b(%rip),%xmm3        # 502698 &lt;$f64.8000000000000000&gt;   <span class="unimportant">abs.go:16</span>
 </span>
-<span class="line">     17</span> <span class="deadsrc">           .          .           		return -x </span><span class="asm" style="">                   .          .   4b446d:                     pxor   %xmm3,%xmm1                                           <span class="unimportant">abs.go:17</span>
+<span class="line">     17</span> <span class="deadsrc">           .          .           		return -x </span><span class="asm">                   .          .   4b446d:                     pxor   %xmm3,%xmm1                                           <span class="unimportant">abs.go:17</span>
                    .          .   4b4471:                     jmp    4b440f &lt;main.busyLoop+0xff&gt;                           <span class="unimportant">sample.go:37</span>
 </span>
 <span class="line">     18</span> <span class="nop">           .          .           	} </span>
@@ -518,509 +146,170 @@ Matching includes the function name, filename or object name.
 <span class="line">     22</span> <span class="nop">           .          .           	return x </span>
 <span class="line">     23</span> <span class="nop">           .          .           } </span>
 </pre>
+<h1>main.busyLoop</h1>/usr/local/google/home/sanjay/go/src/github.com/google/pprof/internal/report/testdata/sample/sample.go
+<pre onclick="pprof_toggle_asm(event)">  Total:       150ms      1.65s (flat, cum) 93.75%
+<span class="line">     24</span> <span class="nop">           .          .           	} </span>
+<span class="line">     25</span> <span class="nop">           .          .           	defer pprof.StopCPUProfile() </span>
+<span class="line">     26</span> <span class="nop">           .          .           	busyLoop() </span>
+<span class="line">     27</span> <span class="nop">           .          .           } </span>
+<span class="line">     28</span> <span class="nop">           .          .            </span>
+<span class="line">     29</span> <span class="deadsrc">           .          .           func busyLoop() { </span><span class="asm">                   .          .   4b4310:     mov    %fs:0xfffffffffffffff8,%rcx                                           <span class="unimportant">sample.go:29</span>
+                   .          .   4b4319:     lea    -0x128(%rsp),%rax                                                     <span class="unimportant">sample.go:29</span>
+                   .          .   4b4321:     cmp    0x10(%rcx),%rax                                                       <span class="unimportant">sample.go:29</span>
+                   .          .   4b4325:     jbe    4b45ac &lt;main.busyLoop+0x29c&gt;                                          <span class="unimportant">sample.go:29</span>
+                   .          .   4b432b:     sub    $0x1a8,%rsp                                                           <span class="unimportant">sample.go:29</span>
+                   .          .   4b4332:     mov    %rbp,0x1a0(%rsp)                                                      <span class="unimportant">sample.go:29</span>
+                   .          .   4b433a:     lea    0x1a0(%rsp),%rbp                                                      <span class="unimportant">sample.go:29</span>
+                                     ⋮
+                   .          .   4b45ac:     callq  451500 &lt;runtime.morestack_noctxt&gt;                                     <span class="unimportant">sample.go:29</span>
+                   .          .   4b45b1:     jmpq   4b4310 &lt;main.busyLoop&gt;                                                <span class="unimportant">sample.go:29</span>
+                   .          .   4b45b6:     int3                                                                         <span class="unimportant">sample.go:29</span>
+                   .          .   4b45b7:     int3                                                                         <span class="unimportant">sample.go:29</span>
+                   .          .   4b45b8:     int3                                                                         <span class="unimportant">sample.go:29</span>
+                   .          .   4b45b9:     int3                                                                         <span class="unimportant">sample.go:29</span>
+                   .          .   4b45ba:     int3                                                                         <span class="unimportant">sample.go:29</span>
+                   .          .   4b45bb:     int3                                                                         <span class="unimportant">sample.go:29</span>
+                   .          .   4b45bc:     int3                                                                         <span class="unimportant">sample.go:29</span>
+                   .          .   4b45bd:     int3                                                                         <span class="unimportant">sample.go:29</span>
+                   .          .   4b45be:     int3                                                                         <span class="unimportant">sample.go:29</span>
+</span>
+<span class="line">     30</span> <span class="deadsrc">           .          .           	m := make(map[int]int) </span><span class="asm">                   .          .   4b4342:             lea    0x110(%rsp),%rdi                                              <span class="unimportant">sample.go:30</span>
+                   .          .   4b434a:             xorps  %xmm0,%xmm0                                                   <span class="unimportant">sample.go:30</span>
+                   .          .   4b434d:             add    $0xfffffffffffffff0,%rdi                                      <span class="unimportant">sample.go:30</span>
+                   .          .   4b4351:             mov    %rbp,-0x10(%rsp)                                              <span class="unimportant">sample.go:30</span>
+                   .          .   4b4356:             lea    -0x10(%rsp),%rbp                                              <span class="unimportant">sample.go:30</span>
+                   .          .   4b435b:             callq  453b80 &lt;runtime.duffzero+0x120&gt;                               <span class="unimportant">sample.go:30</span>
+                   .          .   4b4360:             mov    0x0(%rbp),%rbp                                                <span class="unimportant">sample.go:30</span>
+                   .          .   4b4364:             lea    0x58(%rsp),%rdi                                               <span class="unimportant">sample.go:30</span>
+                   .          .   4b4369:             add    $0xffffffffffffffd0,%rdi                                      <span class="unimportant">sample.go:30</span>
+                   .          .   4b436d:             mov    %rbp,-0x10(%rsp)                                              <span class="unimportant">sample.go:30</span>
+                   .          .   4b4372:             lea    -0x10(%rsp),%rbp                                              <span class="unimportant">sample.go:30</span>
+                   .          .   4b4377:             callq  453b62 &lt;runtime.duffzero+0x102&gt;                               <span class="unimportant">sample.go:30</span>
+                   .          .   4b437c:             mov    0x0(%rbp),%rbp                                                <span class="unimportant">sample.go:30</span>
+                   .          .   4b4380:             lea    0x1ca19(%rip),%rax        # 4d0da0 &lt;type.*+0x1bda0&gt;           <span class="unimportant">sample.go:30</span>
+                   .          .   4b4387:             mov    %rax,(%rsp)                                                   <span class="unimportant">sample.go:30</span>
+                   .          .   4b438b:             movq   $0x0,0x8(%rsp)                                                <span class="unimportant">sample.go:30</span>
+                   .          .   4b4394:             lea    0x110(%rsp),%rcx                                              <span class="unimportant">sample.go:30</span>
+                   .          .   4b439c:             mov    %rcx,0x10(%rsp)                                               <span class="unimportant">sample.go:30</span>
+                   .          .   4b43a1:             lea    0x58(%rsp),%rcx                                               <span class="unimportant">sample.go:30</span>
+                   .          .   4b43a6:             mov    %rcx,0x18(%rsp)                                               <span class="unimportant">sample.go:30</span>
+                   .          .   4b43ab:             callq  407f90 &lt;runtime.makemap&gt;                                      <span class="unimportant">sample.go:30</span>
+                   .          .   4b43b0:             mov    0x20(%rsp),%rax                                               <span class="unimportant">sample.go:30</span>
+                   .          .   4b43b5:             mov    %rax,0xe8(%rsp)                                               <span class="unimportant">sample.go:30</span>
+                   .          .   4b43bd:             xor    %ecx,%ecx                                                     <span class="unimportant">sample.go:30</span>
+</span>
+<span class="line">     31</span> <span class="deadsrc">           .          .           	for i := 0; i &lt; 1000000; i++ { </span><span class="asm">                   .          .   4b43bf:             jmp    4b43fc &lt;main.busyLoop+0xec&gt;                                   <span class="unimportant">sample.go:31</span>
+                   .          .   4b43c1:             mov    %rcx,0x30(%rsp)                                               <span class="unimportant">sample.go:31</span>
+                   .          .   4b43c6:             lea    0x1c9d3(%rip),%rdx        # 4d0da0 &lt;type.*+0x1bda0&gt;           <span class="unimportant">sample.go:31</span>
+                                     ⋮
+                   .          .   4b43f1:             inc    %rcx                                                          <span class="unimportant">sample.go:31</span>
+                   .          .   4b43f4:             mov    0xe8(%rsp),%rax                                               <span class="unimportant">sample.go:31</span>
+                   .          .   4b43fc:             cmp    $0xf4240,%rcx                                                 <span class="unimportant">sample.go:31</span>
+                   .          .   4b4403:             jl     4b43c1 &lt;main.busyLoop+0xb1&gt;                                   <span class="unimportant">sample.go:31</span>
+                   .          .   4b4405:             xor    %ecx,%ecx                                                     <span class="unimportant">sample.go:31</span>
+                   .          .   4b4407:             xorps  %xmm0,%xmm0                                                   <span class="unimportant">sample.go:31</span>
+</span>
+<span class="line">     32</span> <span class="deadsrc">           .      130ms           		m[i] = i + 10 </span><span class="asm">                   .          .   4b43cd:                     mov    %rdx,(%rsp)                                           <span class="unimportant">sample.go:32</span>
+                   .          .   4b43d1:                     mov    %rax,0x8(%rsp)                                        <span class="unimportant">sample.go:32</span>
+                   .          .   4b43d6:                     mov    %rcx,0x10(%rsp)                                       <span class="unimportant">sample.go:32</span>
+                   .      130ms   4b43db:                     callq  40c210 &lt;runtime.mapassign_fast64&gt;                     <span class="unimportant">sample.go:32</span>
+                   .          .   4b43e0:                     mov    0x18(%rsp),%rax                                       <span class="unimportant">sample.go:32</span>
+                   .          .   4b43e5:                     mov    0x30(%rsp),%rcx                                       <span class="unimportant">sample.go:32</span>
+                   .          .   4b43ea:                     lea    0xa(%rcx),%rdx                                        <span class="unimportant">sample.go:32</span>
+                   .          .   4b43ee:                     mov    %rdx,(%rax)                                           <span class="unimportant">sample.go:32</span>
+</span>
+<span class="line">     33</span> <span class="nop">           .          .           	} </span>
+<span class="line">     34</span> <span class="nop">           .          .           	var sum float64 </span>
+<span class="line">     35</span> <span class="deadsrc">        50ms       50ms           	for i := 0; i &lt; 100; i++ { </span><span class="asm">                   .          .   4b440a:             jmpq   4b4491 &lt;main.busyLoop+0x181&gt;                                  <span class="unimportant">sample.go:35</span>
+                50ms       50ms   4b440f:             movsd  %xmm1,0x48(%rsp)                                              <span class="unimportant">sample.go:35</span>
+                   .          .   4b4415:             lea    0x140(%rsp),%rax                                              <span class="unimportant">sample.go:35</span>
+                                     ⋮
+                   .          .   4b4485:             lea    0x1(%rdx),%rcx                                                <span class="unimportant">sample.go:35</span>
+                   .          .   4b4489:             mov    0xe8(%rsp),%rax                                               <span class="unimportant">sample.go:35</span>
+                   .          .   4b4491:             cmp    $0x64,%rcx                                                    <span class="unimportant">sample.go:35</span>
+                   .          .   4b4495:             jge    4b44f1 &lt;main.busyLoop+0x1e1&gt;                                  <span class="unimportant">sample.go:35</span>
+                   .          .   4b4497:             mov    %rcx,0x38(%rsp)                                               <span class="unimportant">sample.go:35</span>
+                   .          .   4b449c:             movsd  %xmm0,0x48(%rsp)                                              <span class="unimportant">sample.go:35</span>
+</span>
+<span class="line">     36</span> <span class="deadsrc">        50ms      1.42s           		for _, v := range m { </span><span class="asm">                   .          .   4b441d:                     mov    %rax,(%rsp)                                           <span class="unimportant">sample.go:36</span>
+                   .      1.37s   4b4421:                     callq  409500 &lt;runtime.mapiternext&gt;                          <span class="unimportant">sample.go:36</span>
+                   .          .   4b4426:                     movsd  0x40(%rsp),%xmm0                                      <span class="unimportant">sample.go:36</span>
+                20ms       20ms   4b442c:                     movsd  0x48(%rsp),%xmm1                                      <span class="unimportant">sample.go:36</span>
+                                     ⋮
+                20ms       20ms   4b4436:                     mov    0x140(%rsp),%rax                                      <span class="unimportant">sample.go:36</span>
+                   .          .   4b443e:                     test   %rax,%rax                                             <span class="unimportant">sample.go:36</span>
+                   .          .   4b4441:                     je     4b4480 &lt;main.busyLoop+0x170&gt;                          <span class="unimportant">sample.go:36</span>
+                10ms       10ms   4b4443:                     movsd  %xmm0,0x40(%rsp)                                      <span class="unimportant">sample.go:36</span>
+                   .          .   4b4449:                     mov    0x148(%rsp),%rax                                      <span class="unimportant">sample.go:36</span>
+                   .          .   4b4451:                     mov    (%rax),%rax                                           <span class="unimportant">sample.go:36</span>
+                                     ⋮
+                   .          .   4b4480:                     mov    0x38(%rsp),%rdx                                       <span class="unimportant">sample.go:36</span>
+                                     ⋮
+                   .          .   4b44a2:                     lea    0x140(%rsp),%rdi                                      <span class="unimportant">sample.go:36</span>
+                   .          .   4b44aa:                     xorps  %xmm0,%xmm0                                           <span class="unimportant">sample.go:36</span>
+                   .          .   4b44ad:                     add    $0xffffffffffffffe0,%rdi                              <span class="unimportant">sample.go:36</span>
+                   .          .   4b44b1:                     mov    %rbp,-0x10(%rsp)                                      <span class="unimportant">sample.go:36</span>
+                   .          .   4b44b6:                     lea    -0x10(%rsp),%rbp                                      <span class="unimportant">sample.go:36</span>
+                   .          .   4b44bb:                     callq  453b71 &lt;runtime.duffzero+0x111&gt;                       <span class="unimportant">sample.go:36</span>
+                   .          .   4b44c0:                     mov    0x0(%rbp),%rbp                                        <span class="unimportant">sample.go:36</span>
+                   .          .   4b44c4:                     lea    0x1c8d5(%rip),%rcx        # 4d0da0 &lt;type.*+0x1bda0&gt;   <span class="unimportant">sample.go:36</span>
+                   .          .   4b44cb:                     mov    %rcx,(%rsp)                                           <span class="unimportant">sample.go:36</span>
+                   .          .   4b44cf:                     mov    %rax,0x8(%rsp)                                        <span class="unimportant">sample.go:36</span>
+                   .          .   4b44d4:                     lea    0x140(%rsp),%rdx                                      <span class="unimportant">sample.go:36</span>
+                   .          .   4b44dc:                     mov    %rdx,0x10(%rsp)                                       <span class="unimportant">sample.go:36</span>
+                   .          .   4b44e1:                     callq  409030 &lt;runtime.mapiterinit&gt;                          <span class="unimportant">sample.go:36</span>
+                   .          .   4b44e6:                     movsd  0x48(%rsp),%xmm0                                      <span class="unimportant">sample.go:36</span>
+                   .          .   4b44ec:                     jmpq   4b4436 &lt;main.busyLoop+0x126&gt;                          <span class="unimportant">sample.go:36</span>
+</span>
+<span class="line">     37</span> <span class="deadsrc">        50ms       50ms           			sum += math.Abs(float64(v)) </span><span class="asm">                   .          .   4b4432:                             addsd  %xmm1,%xmm0                                   <span class="unimportant">sample.go:37</span>
+                                     ⋮
+                   .          .   4b4454:                             xorps  %xmm1,%xmm1                                   <span class="unimportant">sample.go:37</span>
+                10ms       10ms   4b4457:                             cvtsi2sd %rax,%xmm1                                  <span class="unimportant">sample.go:37</span>
+                40ms       40ms   4b445c:                             xorps  %xmm2,%xmm2                                   <span class="unimportant">sample.go:37</span>
+                   .          .   4b445f:                             ucomisd %xmm1,%xmm2                                  <span class="unimportant">abs.go:16</span>
+                   .          .   4b4463:                             jbe    4b4473 &lt;main.busyLoop+0x163&gt;                  <span class="unimportant">abs.go:16</span>
+                   .          .   4b4465:                             movsd  0x4e22b(%rip),%xmm3        # 502698 &lt;$f64.8000000000000000&gt; <span class="unimportant">abs.go:16</span>
+                   .          .   4b446d:                             pxor   %xmm3,%xmm1                                   <span class="unimportant">abs.go:17</span>
+                   .          .   4b4471:                             jmp    4b440f &lt;main.busyLoop+0xff&gt;                   <span class="unimportant">sample.go:37</span>
+                   .          .   4b4473:                             ucomisd %xmm2,%xmm1                                  <span class="unimportant">abs.go:19</span>
+                   .          .   4b4477:                             jne    4b440f &lt;main.busyLoop+0xff&gt;                   <span class="unimportant">abs.go:19</span>
+                   .          .   4b4479:                             jp     4b440f &lt;main.busyLoop+0xff&gt;                   <span class="unimportant">abs.go:19</span>
+                   .          .   4b447b:                             xorps  %xmm1,%xmm1                                   <span class="unimportant">abs.go:19</span>
+                   .          .   4b447e:                             jmp    4b440f &lt;main.busyLoop+0xff&gt;                   <span class="unimportant">sample.go:37</span>
+</span>
+<span class="line">     38</span> <span class="nop">           .          .           		} </span>
+<span class="line">     39</span> <span class="nop">           .          .           	} </span>
+<span class="line">     40</span> <span class="deadsrc">           .          .           	fmt.Println("Sum", sum) </span><span class="asm">                   .          .   4b44f1:             movsd  %xmm0,0x50(%rsp)                                              <span class="unimportant">sample.go:40</span>
+                   .          .   4b44f7:             movq   $0x0,0xf0(%rsp)                                               <span class="unimportant">sample.go:40</span>
+                   .          .   4b4503:             movq   $0x0,0xf8(%rsp)                                               <span class="unimportant">sample.go:40</span>
+                   .          .   4b450f:             movq   $0x0,0x100(%rsp)                                              <span class="unimportant">sample.go:40</span>
+                   .          .   4b451b:             movq   $0x0,0x108(%rsp)                                              <span class="unimportant">sample.go:40</span>
+                   .          .   4b4527:             lea    0x13eb2(%rip),%rax        # 4c83e0 &lt;type.*+0x133e0&gt;           <span class="unimportant">sample.go:40</span>
+                   .          .   4b452e:             mov    %rax,0xf0(%rsp)                                               <span class="unimportant">sample.go:40</span>
+                   .          .   4b4536:             lea    0x4e5a3(%rip),%rax        # 502ae0 &lt;main.statictmp_2&gt;         <span class="unimportant">sample.go:40</span>
+                   .          .   4b453d:             mov    %rax,0xf8(%rsp)                                               <span class="unimportant">sample.go:40</span>
+                   .          .   4b4545:             lea    0x13294(%rip),%rax        # 4c77e0 &lt;type.*+0x127e0&gt;           <span class="unimportant">sample.go:40</span>
+                   .          .   4b454c:             mov    %rax,(%rsp)                                                   <span class="unimportant">sample.go:40</span>
+                   .          .   4b4550:             lea    0x50(%rsp),%rax                                               <span class="unimportant">sample.go:40</span>
+                   .          .   4b4555:             mov    %rax,0x8(%rsp)                                                <span class="unimportant">sample.go:40</span>
+                   .          .   4b455a:             callq  40da80 &lt;runtime.convT2E64&gt;                                    <span class="unimportant">sample.go:40</span>
+                   .          .   4b455f:             mov    0x18(%rsp),%rax                                               <span class="unimportant">sample.go:40</span>
+                   .          .   4b4564:             mov    0x10(%rsp),%rcx                                               <span class="unimportant">sample.go:40</span>
+                   .          .   4b4569:             mov    %rcx,0x100(%rsp)                                              <span class="unimportant">sample.go:40</span>
+                   .          .   4b4571:             mov    %rax,0x108(%rsp)                                              <span class="unimportant">sample.go:40</span>
+                   .          .   4b4579:             lea    0xf0(%rsp),%rax                                               <span class="unimportant">sample.go:40</span>
+                   .          .   4b4581:             mov    %rax,(%rsp)                                                   <span class="unimportant">sample.go:40</span>
+                   .          .   4b4585:             movq   $0x2,0x8(%rsp)                                                <span class="unimportant">sample.go:40</span>
+                   .          .   4b458e:             movq   $0x2,0x10(%rsp)                                               <span class="unimportant">sample.go:40</span>
+                   .          .   4b4597:             callq  493030 &lt;fmt.Println&gt;                                          <span class="unimportant">sample.go:40</span>
+</span>
+<span class="line">     41</span> <span class="deadsrc">           .          .           } </span><span class="asm">                   .          .   4b459c:     mov    0x1a0(%rsp),%rbp                                                      <span class="unimportant">sample.go:41</span>
+                   .          .   4b45a4:     add    $0x1a8,%rsp                                                           <span class="unimportant">sample.go:41</span>
+                   .          .   4b45ab:     retq                                                                         <span class="unimportant">sample.go:41</span>
+</span>
+</pre>
 
-</div>
 
-
-<script>
-
-
-function initPanAndZoom(svg, clickHandler) {
-  'use strict';
-
-  
-  const IDLE = 0
-  const MOUSEPAN = 1
-  const TOUCHPAN = 2
-  const TOUCHZOOM = 3
-  let mode = IDLE
-
-  
-  let currentScale = 1.0
-  const initWidth = svg.viewBox.baseVal.width
-  const initHeight = svg.viewBox.baseVal.height
-
-  
-  let panLastX = 0      
-  let panLastY = 0      
-  let moved = false     
-  let touchid = null    
-
-  
-  let touchid2 = null     
-  let initGap = 1.0       
-  let initScale = 1.0     
-  let centerPoint = null  
-
-  
-  function toSvg(x, y) {
-    const p = svg.createSVGPoint()
-    p.x = x
-    p.y = y
-    let m = svg.getCTM()
-    if (m == null) m = svg.getScreenCTM()  
-    return p.matrixTransform(m.inverse())
-  }
-
-  
-  
-  function rescale(s, u) {
-    
-    if (s < 0.2) s = 0.2
-    if (s > 10.0) s = 10.0
-
-    currentScale = s
-
-    
-    
-    
-    const vb = svg.viewBox
-    const w1 = vb.baseVal.width
-    const w2 = initWidth / s
-    const h1 = vb.baseVal.height
-    const h2 = initHeight / s
-    vb.baseVal.width = w2
-    vb.baseVal.height = h2
-
-    
-    
-    
-    
-    
-    
-    
-    vb.baseVal.x = u.x - (u.x - vb.baseVal.x) * (w2 / w1)
-    vb.baseVal.y = u.y - (u.y - vb.baseVal.y) * (h2 / h1)
-  }
-
-  function handleWheel(e) {
-    if (e.deltaY == 0) return
-    
-    rescale(currentScale * (e.deltaY < 0 ? 1.1 : (1/1.1)),
-            toSvg(e.offsetX, e.offsetY))
-  }
-
-  function setMode(m) {
-    mode = m
-    touchid = null
-    touchid2 = null
-  }
-
-  function panStart(x, y) {
-    moved = false
-    panLastX = x
-    panLastY = y
-  }
-
-  function panMove(x, y) {
-    let dx = x - panLastX
-    let dy = y - panLastY
-    if (Math.abs(dx) <= 2 && Math.abs(dy) <= 2) return  
-
-    moved = true
-    panLastX = x
-    panLastY = y
-
-    
-    const swidth = svg.clientWidth || svg.parentNode.clientWidth
-    const sheight = svg.clientHeight || svg.parentNode.clientHeight
-
-    
-    dx *= (svg.viewBox.baseVal.width / swidth)
-    dy *= (svg.viewBox.baseVal.height / sheight)
-
-    svg.viewBox.baseVal.x -= dx
-    svg.viewBox.baseVal.y -= dy
-  }
-
-  function handleScanStart(e) {
-    if (e.button != 0) return  
-    setMode(MOUSEPAN)
-    panStart(e.clientX, e.clientY)
-    e.preventDefault()
-    svg.addEventListener("mousemove", handleScanMove)
-  }
-
-  function handleScanMove(e) {
-    if (e.buttons == 0) {
-      
-      setMode(IDLE)
-      svg.removeEventListener("mousemove", handleScanMove)
-      return
-    }
-    if (mode == MOUSEPAN) panMove(e.clientX, e.clientY)
-  }
-
-  function handleScanEnd(e) {
-    if (mode == MOUSEPAN) panMove(e.clientX, e.clientY)
-    setMode(IDLE)
-    svg.removeEventListener("mousemove", handleScanMove)
-    if (!moved) clickHandler(e.target)
-  }
-
-  
-  function findTouch(tlist, id) {
-    for (const t of tlist) {
-      if (t.identifier == id) return t
-    }
-    return null
-  }
-
- 
-  function touchGap(t1, t2) {
-    const dx = t1.clientX - t2.clientX
-    const dy = t1.clientY - t2.clientY
-    return Math.hypot(dx, dy)
-  }
-
-  function handleTouchStart(e) {
-    if (mode == IDLE && e.changedTouches.length == 1) {
-      
-      const t = e.changedTouches[0]
-      setMode(TOUCHPAN)
-      touchid = t.identifier
-      panStart(t.clientX, t.clientY)
-      e.preventDefault()
-    } else if (mode == TOUCHPAN && e.touches.length == 2) {
-      
-      setMode(TOUCHZOOM)
-      const t1 = e.touches[0]
-      const t2 = e.touches[1]
-      touchid = t1.identifier
-      touchid2 = t2.identifier
-      initScale = currentScale
-      initGap = touchGap(t1, t2)
-      centerPoint = toSvg((t1.clientX + t2.clientX) / 2,
-                          (t1.clientY + t2.clientY) / 2)
-      e.preventDefault()
-    }
-  }
-
-  function handleTouchMove(e) {
-    if (mode == TOUCHPAN) {
-      const t = findTouch(e.changedTouches, touchid)
-      if (t == null) return
-      if (e.touches.length != 1) {
-        setMode(IDLE)
-        return
-      }
-      panMove(t.clientX, t.clientY)
-      e.preventDefault()
-    } else if (mode == TOUCHZOOM) {
-      
-      const t1 = findTouch(e.touches, touchid)
-      const t2 = findTouch(e.touches, touchid2)
-      if (t1 == null || t2 == null) return
-      const gap = touchGap(t1, t2)
-      rescale(initScale * gap / initGap, centerPoint)
-      e.preventDefault()
-    }
-  }
-
-  function handleTouchEnd(e) {
-    if (mode == TOUCHPAN) {
-      const t = findTouch(e.changedTouches, touchid)
-      if (t == null) return
-      panMove(t.clientX, t.clientY)
-      setMode(IDLE)
-      e.preventDefault()
-      if (!moved) clickHandler(t.target)
-    } else if (mode == TOUCHZOOM) {
-      setMode(IDLE)
-      e.preventDefault()
-    }
-  }
-
-  svg.addEventListener("mousedown", handleScanStart)
-  svg.addEventListener("mouseup", handleScanEnd)
-  svg.addEventListener("touchstart", handleTouchStart)
-  svg.addEventListener("touchmove", handleTouchMove)
-  svg.addEventListener("touchend", handleTouchEnd)
-  svg.addEventListener("wheel", handleWheel, true)
-}
-
-function viewer(baseUrl, nodes) {
-  'use strict';
-
-  
-  const search = document.getElementById("searchbox")
-  const graph0 = document.getElementById("graph0")
-  const svg = (graph0 == null ? null : graph0.parentElement)
-  const toptable = document.getElementById("toptable")
-
-  let regexpActive = false
-  let selected = new Map()
-  let origFill = new Map()
-  let searchAlarm = null
-  let buttonsEnabled = true
-
-  function handleDetails() {
-    const detailsText = document.getElementById("detailtext")
-    if (detailsText != null) detailsText.style.display = "block"
-  }
-
-  function handleCloseDetails() {
-    const detailsText = document.getElementById("detailtext")
-    if (detailsText != null) detailsText.style.display = "none"
-  }
-
-  function handleKey(e) {
-    if (e.keyCode != 13) return
-    window.location.href =
-        updateUrl(new URL("/source", window.location.href), "f")
-    e.preventDefault()
-  }
-
-  function handleSearch() {
-    
-    if (searchAlarm != null) {
-      clearTimeout(searchAlarm)
-    }
-    searchAlarm = setTimeout(selectMatching, 300)
-
-    regexpActive = true
-    updateButtons()
-  }
-
-  function selectMatching() {
-    searchAlarm = null
-    let re = null
-    if (search.value != "") {
-      try {
-        re = new RegExp(search.value)
-      } catch (e) {
-        
-        return
-      }
-    }
-
-    function match(text) {
-      return re != null && re.test(text)
-    }
-
-    
-    selected.forEach(function(v, n) {
-      if (!match(nodes[n])) {
-        unselect(n, document.getElementById("node" + n))
-      }
-    })
-
-    
-    for (let n = 0; n < nodes.length; n++) {
-      if (!selected.has(n) && match(nodes[n])) {
-        select(n, document.getElementById("node" + n))
-      }
-    }
-
-    updateButtons()
-  }
-
-  function toggleSvgSelect(elem) {
-    
-    while (elem != null && elem.parentElement != graph0) {
-      elem = elem.parentElement
-    }
-    if (!elem) return
-
-    
-    regexpActive = false
-
-    const n = nodeId(elem)
-    if (n < 0) return
-    if (selected.has(n)) {
-      unselect(n, elem)
-    } else {
-      select(n, elem)
-    }
-    updateButtons()
-  }
-
-  function unselect(n, elem) {
-    if (elem == null) return
-    selected.delete(n)
-    setBackground(elem, false)
-  }
-
-  function select(n, elem) {
-    if (elem == null) return
-    selected.set(n, true)
-    setBackground(elem, true)
-  }
-
-  function nodeId(elem) {
-    const id = elem.id
-    if (!id) return -1
-    if (!id.startsWith("node")) return -1
-    const n = parseInt(id.slice(4), 10)
-    if (isNaN(n)) return -1
-    if (n < 0 || n >= nodes.length) return -1
-    return n
-  }
-
-  function setBackground(elem, set) {
-    
-    if (elem.nodeName == "TR") {
-      elem.classList.toggle("hilite", set)
-      return
-    }
-
-    
-    const p = findPolygon(elem)
-    if (p != null) {
-      if (set) {
-        origFill.set(p, p.style.fill)
-        p.style.fill = "#ccccff"
-      } else if (origFill.has(p)) {
-        p.style.fill = origFill.get(p)
-      }
-    }
-  }
-
-  function findPolygon(elem) {
-    if (elem.localName == "polygon") return elem
-    for (const c of elem.children) {
-      const p = findPolygon(c)
-      if (p != null) return p
-    }
-    return null
-  }
-
-  
-  function quotemeta(str) {
-    return str.replace(/([\\\.?+*\[\](){}|^$])/g, '\\$1')
-  }
-
-  
-  
-  function makeLinkDynamic(id) {
-    const elem = document.getElementById(id)
-    if (elem == null) return
-
-    
-    
-    let param = "f"
-    if (id == "ignore") param = "i"
-    if (id == "hide") param = "h"
-    if (id == "show") param = "s"
-
-    
-    elem.addEventListener("mouseenter", updater)
-    elem.addEventListener("touchstart", updater)
-
-    function updater() {
-      elem.href = updateUrl(new URL(elem.href), param)
-    }
-  }
-
-  
-  function updateUrl(url, param) {
-    url.hash = ""
-
-    
-    
-    let re = regexpActive
-        ? search.value
-        : Array.from(selected.keys()).map(key => quotemeta(nodes[key])).join("|")
-
-    
-    const params = url.searchParams
-    for (const p of new URLSearchParams(window.location.search)) {
-      params.set(p[0], p[1])
-    }
-
-    if (re != "") {
-      
-      if (param != "f" && param != "s" && params.has(param)) {
-        const old = params.get(param)
-         if (old != "") {
-          re += "|" + old
-        }
-      }
-      params.set(param, re)
-    }
-
-    return url.toString()
-  }
-
-  function handleTopClick(e) {
-    
-    let elem = e.target
-    while (elem != null && elem.nodeName != "TR") {
-      elem = elem.parentElement
-    }
-    if (elem == null || elem.children.length < 6) return
-
-    e.preventDefault()
-    const tr = elem
-    const td = elem.children[5]
-    if (td.nodeName != "TD") return
-    const name = td.innerText
-    const index = nodes.indexOf(name)
-    if (index < 0) return
-
-    
-    regexpActive = false
-
-    if (selected.has(index)) {
-      unselect(index, elem)
-    } else {
-      select(index, elem)
-    }
-    updateButtons()
-  }
-
-  function updateButtons() {
-    const enable = (search.value != "" || selected.size != 0)
-    if (buttonsEnabled == enable) return
-    buttonsEnabled = enable
-    for (const id of ["focus", "ignore", "hide", "show"]) {
-      const link = document.getElementById(id)
-      if (link != null) {
-        link.classList.toggle("disabled", !enable)
-      }
-    }
-  }
-
-  
-  updateButtons()
-
-  
-  if (svg != null) {
-    initPanAndZoom(svg, toggleSvgSelect)
-  }
-  if (toptable != null) {
-    toptable.addEventListener("mousedown", handleTopClick)
-    toptable.addEventListener("touchstart", handleTopClick)
-  }
-
-  const ids = ["topbtn", "graphbtn", "peek", "list", "disasm",
-               "focus", "ignore", "hide", "show"]
-  ids.forEach(makeLinkDynamic)
-
-  
-  function addAction(id, action) {
-    const btn = document.getElementById(id)
-    if (btn != null) {
-      btn.addEventListener("click", action)
-      btn.addEventListener("touchstart", action)
-    }
-  }
-
-  addAction("details", handleDetails)
-  addAction("closedetails", handleCloseDetails)
-
-  search.addEventListener("input", handleSearch)
-  search.addEventListener("keydown", handleKey)
-
-  
-  const main = document.getElementById("bodycontainer")
-  if (main) {
-    main.focus()
-  }
-}
-</script>
-
-<script>viewer("/source", null)</script>
 
 
 </body></html>
